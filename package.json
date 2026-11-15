@@ -10,7 +10,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:drop": "drizzle-kit drop"
+    "db:drop": "drizzle-kit drop",
+    "db:manage-admins": "node scripts/manage-admins.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.1",
