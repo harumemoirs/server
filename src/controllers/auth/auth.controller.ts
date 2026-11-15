@@ -8,6 +8,27 @@ import { createToken, hashPassword, verifyPassword } from "../../tokens/token";
 
 dotenv.config();
 
+const getCookieOptions = (c: Context) => {
+  const origin = c.req.header("origin") || "";
+  const host = c.req.header("host") || "";
+  let domain: string | undefined = undefined;
+
+  if (origin.includes("harumemoirs.in") || host.includes("harumemoirs.in")) {
+    domain = ".harumemoirs.in";
+  } else if (origin.includes("harumemoirs.xyz") || host.includes("harumemoirs.xyz")) {
+    domain = ".harumemoirs.xyz";
+  }
+
+  return {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None" as const,
+    domain,
+    maxAge: 5 * 24 * 60 * 60,
+    path: "/",
+  };
+};
+
 interface AdminData {
   email: string;
   password: string;
@@ -58,16 +79,11 @@ export const loginAdmin = async (c: Context) => {
       );
     }
     const token = await createToken(adminAuthData.id, c.env.JWT_SECRET);
-    setCookie(c, "an_token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      maxAge: 5 * 24 * 60 * 60,
-      path: "/",
-    });
+    setCookie(c, "an_token", token, getCookieOptions(c));
     return c.json({
       success: true,
       message: "Login successful",
+      token,
       admin: {
         email: adminAuthData.email,
         name: adminAuthData.name,
@@ -157,16 +173,11 @@ export const registerAdmin = async (c: Context) => {
       });
     const adminRegistrationData = newAdmin[0];
     const token = await createToken(adminRegistrationData.id, c.env.JWT_SECRET);
-    setCookie(c, "an_token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      maxAge: 2 * 24 * 60 * 60,
-      path: "/",
-    });
+    setCookie(c, "an_token", token, getCookieOptions(c));
     return c.json({
       success: true,
       message: "Admin registration successful",
+      token,
       admins: {
         email: adminRegistrationData.email,
         name: adminRegistrationData.name,
@@ -221,12 +232,11 @@ export const me = async (c: Context) => {
 
 export const logout = async (c: Context) => {
   try {
-    setCookie(c,"an_token", "", {
-      httpOnly: true,
-      secure: true,
-      path: "/",
-      sameSite: "Strict",
-      expires: new Date(0), 
+    const opts = getCookieOptions(c);
+    setCookie(c, "an_token", "", {
+      ...opts,
+      maxAge: 0,
+      expires: new Date(0),
     });
 
     return c.json({ success: true, message: "Logged out" });
