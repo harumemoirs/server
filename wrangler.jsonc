@@ -6,6 +6,12 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "vars": {
+    "BASE_URL": "https://harumemoirs.in",
+    "FRONTEND_URL": "https://admin.harumemoirs.in",
+    "CLOUDINARY_NAME": "dwtbvdlzg",
+    "CLOUDINARY_API_KEY": "329332867222185"
+  },
   // "vars": {
   //   "MY_VAR": "my-variable"
   // },
