@@ -1,0 +1,26 @@
+# Database connection string (from Neon console: https://console.neon.tech)
+DATABASE_URL=postgresql://<user>:<password>@<ep-endpoint>.neon.tech/<dbname>?sslmode=require
+
+# Secret key used for signing Admin JWT tokens (generate any secure random string)
+JWT_SECRET=your_super_secret_jwt_key_here
+
+# Secret authorization code for registering an admin via API
+BASE_CODE=your_secret_admin_registration_passcode
+
+# Base public URL of the client website (for newsletter unsubscribe links)
+BASE_URL=https://harumemoirs.in
+
+# Base URL of the admin panel (for password reset links)
+FRONTEND_URL=https://admin.harumemoirs.in
+
+# Resend API Key for sending newsletter and broadcast emails (from https://resend.com)
+# Note: In the codebase the variable is named RESEND_API_URL, but it holds the Resend API Key
+RESEND_API_URL=re_your_resend_api_key_here
+
+# Cloudinary credentials for media/image uploads (from https://console.cloudinary.com)
+CLOUDINARY_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_SECRET_KEY=your_cloudinary_api_secret
+
+# Optional unsigned upload preset if not using signed uploads
+CLOUDINARY_PRESET=your_upload_preset
