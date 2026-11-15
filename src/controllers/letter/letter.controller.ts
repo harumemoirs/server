@@ -301,9 +301,13 @@ export const getAllLetters = async (c: Context) => {
             hasPrevPage: page > 1,
           },
         });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching letters:", error);
-    return c.json({ success: false, message: "Failed to fetch letters" }, 500);
+    return c.json({
+      success: false,
+      message: "Failed to fetch letters",
+      error: error?.message || String(error),
+    }, 500);
   }
 };
 

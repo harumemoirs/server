@@ -335,9 +335,13 @@ export const getAllJournals = async (c: Context) => {
         hasPrevPage: page > 1,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching journals:", error);
-    return c.json({ success: false, message: "Failed to fetch journals" }, 500);
+    return c.json({
+      success: false,
+      message: "Failed to fetch journals",
+      error: error?.message || String(error),
+    }, 500);
   }
 };
 

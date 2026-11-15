@@ -9,6 +9,8 @@ import journalLikeRouter from './routes/admins/journals/journal.like'
 import poemLikeRouter from './routes/admins/poems/poem.like'
 import letterRouter from './routes/admins/letter/letter'
 import { logger } from 'hono/logger'
+import { getDb } from './db/db.service'
+import { sql } from 'drizzle-orm'
 import letterLikeRouter from './routes/admins/letter/letter.like'
 import userBlogRouter from './routes/users/blogs/blogs'
 import userJournalRouter from './routes/users/journals/journal'
@@ -47,8 +49,30 @@ app.use("*", cors({
 }));
 app.use(logger())
 
-app.get('/health', (c) => {
-  return c.text('API health status : working')
+app.get('/health', async (c) => {
+  let dbStatus = "not tested"
+  let dbError: string | null = null
+  try {
+    if (!c.env?.DATABASE_URL) {
+      dbStatus = "DATABASE_URL missing from environment variables"
+    } else {
+      const db = getDb(c.env.DATABASE_URL)
+      await db.execute(sql`SELECT 1`)
+      dbStatus = "connected"
+    }
+  } catch (err: any) {
+    dbStatus = "error"
+    dbError = err?.message || String(err)
+  }
+
+  return c.json({
+    status: 'working',
+    env_keys_present: Object.keys(c.env || {}),
+    database: {
+      status: dbStatus,
+      error: dbError,
+    }
+  })
 })
 
 app.get('/', (c) => {

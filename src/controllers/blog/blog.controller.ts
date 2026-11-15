@@ -330,9 +330,13 @@ export const getAllBlogs = async (c: Context) => {
         hasPrevPage: page > 1,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching blogs:", error);
-    return c.json({ success: false, message: "Failed to fetch blogs" }, 500);
+    return c.json({
+      success: false,
+      message: "Failed to fetch blogs",
+      error: error?.message || String(error),
+    }, 500);
   }
 };
  

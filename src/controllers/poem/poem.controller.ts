@@ -339,9 +339,13 @@ export const getAllPoems = async (c: Context) => {
         hasPrevPage: page > 1,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error fetching poems:", error);
-    return c.json({ success: false, message: "Failed to fetch poems" }, 500);
+    return c.json({
+      success: false,
+      message: "Failed to fetch poems",
+      error: error?.message || String(error),
+    }, 500);
   }
 };
 
