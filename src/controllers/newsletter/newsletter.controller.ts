@@ -109,7 +109,7 @@ const sendNewsletter = async (
     const results = await Promise.allSettled(
       batch.map(async (sub) => {
         const res = await resend.emails.send({
-          from: "Newsletter <newsletter@harumemoirs.xyz>",
+          from: c.env.EMAIL_FROM || "Newsletter <newsletter@harumemoirs.in>",
           to: sub.email,
           subject: data.subject,
           html: buildHtml(

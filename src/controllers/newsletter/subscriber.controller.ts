@@ -68,7 +68,7 @@ export const subscribe = async (c: Context) => {
 
     console.log('email-payload:',email)
     const mail = await resend.emails.send({
-      from: "Welcome <newsletter@harumemoirs.xyz>",
+      from: c.env.EMAIL_FROM || "Welcome <newsletter@harumemoirs.in>",
       to: email ,
       subject: "You're subscribed! 🎉",
       html: `<h2>Welcome to our Newsletter!</h2>

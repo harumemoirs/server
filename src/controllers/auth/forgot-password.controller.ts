@@ -51,7 +51,7 @@ export const forgotPassword = async (c: Context) => {
     const resend = new Resend(c.env.RESEND_API_URL);
 
     await resend.emails.send({
-      from: "Admin <no-reply@harumemoirs.xyz>",
+      from: c.env.EMAIL_NO_REPLY || "Admin <no-reply@harumemoirs.in>",
       to: email,
       subject: "Reset dashboard password",
       html: `
