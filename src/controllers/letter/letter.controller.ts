@@ -311,7 +311,10 @@ export const getAllLetters = async (c: Context) => {
 export const getLetterById = async (c: Context) => {
   try {
     const db = getDb(c.env.DATABASE_URL);
-    const id = c.req.param("id")
+    const id = c.req.param("id");
+    if (!id) {
+      return c.json({ success: false, message: "Letter ID is required" }, 400);
+    }
     const letter = await db
       .select()
       .from(letters)

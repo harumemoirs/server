@@ -4,7 +4,7 @@ import { sign, verify } from "hono/jwt";
 dotenv.config();
 
 const createToken = async (adminId: string, secret: string) => {
-  return sign({ id: adminId },secret);
+  return sign({ id: adminId }, secret, "HS256");
 };
 
 const hashPassword = async (password: string) => {
@@ -20,7 +20,7 @@ const verifyPassword = async (password: string, hashedPassword: string) => {
 };
 const verifyToken = async (token: string, secret: string) => {
   try {
-    const payload = await verify(token, secret);
+    const payload = await verify(token, secret, "HS256");
     return payload as {
       id:string;
       exp?:number;
