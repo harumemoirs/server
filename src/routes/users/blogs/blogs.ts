@@ -5,9 +5,10 @@ import { Hono } from "hono";
 const userBlogRouter = new Hono();
 
 
-userBlogRouter.get('/all-blogs',getAllBlogs);
+userBlogRouter.get('/all-blogs', getAllBlogs);
 
-userBlogRouter.get('/by-slug/:slug',getBlogBySlug)
+userBlogRouter.get('/by-slug/:slug', getBlogBySlug);
+userBlogRouter.get('/blog-slug/:slug', getBlogBySlug);
 
 
 export default userBlogRouter

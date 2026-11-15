@@ -4,8 +4,9 @@ import { Hono } from "hono";
 const subscribeRouter = new Hono();
 
  
-subscribeRouter.post('/subscribe',subscribe)
+subscribeRouter.post('/subscribe', subscribe);
 
-subscribeRouter.get('/unsubscribe',unsubscribe)
+subscribeRouter.get('/unsubscribe', unsubscribe);
+subscribeRouter.post('/unsubscribe', unsubscribe);
 
 export default subscribeRouter

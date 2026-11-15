@@ -117,7 +117,7 @@ const sendNewsletter = async (
             data.body,
             imageUrl,
             sub.email,
-            c.env.BASE_URL
+            c.env.BASE_URL || "https://harumemoirs.in"
           ),
         });
 

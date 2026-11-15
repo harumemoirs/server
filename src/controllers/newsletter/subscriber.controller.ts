@@ -183,7 +183,15 @@ export const removeSubscriber = async (c:Context) => {
 
 export const unsubscribe = async (c: Context) => {
   try {
-    const email = c.req.query("email");
+    let email = c.req.query("email");
+    if (!email) {
+      try {
+        const body = await c.req.json();
+        email = body?.email;
+      } catch {
+        // Not a JSON body, keep email undefined
+      }
+    }
 
     if (!email) {
       return c.json(

@@ -30,9 +30,19 @@ export type Env = {
 const app = new Hono<{Bindings:Env}>()
 
 app.use("*", cors({
- origin:[ "https://haru-memoirs-admin.vercel.app","https://harumemoirs.xyz","https://admin.harumemoirs.xyz","http://localhost:3000"],
+  origin: [
+    "https://harumemoirs.in",
+    "https://www.harumemoirs.in",
+    "https://admin.harumemoirs.in",
+    "https://haru-memoirs-admin.vercel.app",
+    "https://harumemoirs.xyz",
+    "https://admin.harumemoirs.xyz",
+    "http://localhost:3000",
+    "http://localhost:3001"
+  ],
   credentials: true,
-  allowHeaders: ["Content-Type"],
+  allowHeaders: ["Content-Type", "Authorization", "Cookie"],
+  allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   exposeHeaders: ["Set-Cookie"],
 }));
 app.use(logger())

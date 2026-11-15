@@ -11,7 +11,8 @@ poemRouter.delete('/delete-poem',authMiddleware,removePoem)
 
 poemRouter.get("/all-poems",getAllPoems)
 
-poemRouter.get("/poem-slug/:slug",getPoemBySlug)
+poemRouter.get("/poem-slug/:slug", getPoemBySlug);
+poemRouter.get("/by-slug/:slug", getPoemBySlug);
 
 poemRouter.get('/poem-id/:id',getPoemById)
 

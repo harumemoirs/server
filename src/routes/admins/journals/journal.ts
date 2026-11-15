@@ -11,7 +11,8 @@ journalRouter.delete('/delete-journal',authMiddleware,removeJournal)
 
 journalRouter.get("/all-journals",getAllJournals)
 
-journalRouter.get("/journal-slug/:slug",getJournalBySlug)
+journalRouter.get("/journal-slug/:slug", getJournalBySlug);
+journalRouter.get("/by-slug/:slug", getJournalBySlug);
 
 journalRouter.get('/journal-id/:id',getJournalById)
 

@@ -1,4 +1,4 @@
-import { addLetter,editLetter,getAllLetters,getLetterById,getLetterByTitle,removeLetter } from "../../../controllers/letter/letter.controller";
+import { addLetter, editLetter, getAllLetters, getLetterById, getLetterByTitle, getLetterBySlug, removeLetter } from "../../../controllers/letter/letter.controller";
 import { Hono } from "hono";
 import { authMiddleware } from "../../../middlewares/auth";
 
@@ -17,5 +17,7 @@ letterRouter.delete('/remove-letter',authMiddleware,removeLetter)
 letterRouter.get('/letter-id/:id',getLetterById)
 
 letterRouter.get('/letter-title/:title',getLetterByTitle)
+
+letterRouter.get('/by-slug/:slug', getLetterBySlug);
 
 export default letterRouter;

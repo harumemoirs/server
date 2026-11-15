@@ -11,7 +11,8 @@ blogRouter.delete('/delete-blog',authMiddleware,removeBlog)
 
 blogRouter.get("/all-blogs",getAllBlogs)
 
-blogRouter.get("/blog-slug/:slug",getBlogBySlug)
+blogRouter.get("/blog-slug/:slug", getBlogBySlug);
+blogRouter.get("/by-slug/:slug", getBlogBySlug);
 
 blogRouter.get('/blog-id/:id',getBlogById)
 

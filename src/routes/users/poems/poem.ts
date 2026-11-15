@@ -5,8 +5,10 @@ const userPoemRouter = new Hono();
 
 userPoemRouter.get('/all-poems',getAllPoems)
 
-userPoemRouter.get('/poem-id/:id',getPoemById)
+userPoemRouter.get('/poem-id/:id', getPoemById);
 
-userPoemRouter.get('/poem--slug/:slug',getPoemBySlug)
+userPoemRouter.get('/by-slug/:slug', getPoemBySlug);
+userPoemRouter.get('/poem-slug/:slug', getPoemBySlug);
+userPoemRouter.get('/poem--slug/:slug', getPoemBySlug);
 
 export default userPoemRouter
